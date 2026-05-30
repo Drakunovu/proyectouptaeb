@@ -1,0 +1,8 @@
+{
+    "name": "aaron/medicina",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    }
+}
