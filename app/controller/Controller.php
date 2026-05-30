@@ -43,7 +43,7 @@ class Controller {
             if ($usuarioEncontrado && password_verify($password, $usuarioEncontrado["password"])) {
                 $_SESSION["login_notif"] = "Logueado";
                 $_SESSION["cedula"] = $usuarioEncontrado["cedula"];
-                header("Location: perfil.php");
+                header("Location: perfil");
                 exit();
             }
             
