@@ -1,7 +1,7 @@
 CREATE DATABASE servicio_medico;
 
 CREATE TABLE usuarios (
-    cedula INT NOT NULL,
+    cedula INT(11) NOT NULL,
     nombre TEXT NOT NULL,
     apellido TEXT NOT NULL,
     contrasena VARCHAR(255) NOT NULL DEFAULT 'UptaebMedicos001',
