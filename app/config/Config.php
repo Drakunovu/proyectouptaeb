@@ -6,10 +6,10 @@ use PDOException;
 
 class Config {
     public static function conexion() {
-        $host = getenv("DB_HOST") ?: "localhost";
-        $db = getenv("DB_NAME") ?: "servicio_medico";
-        $user = getenv("DB_USER") ?: "root";
-        $password = getenv("DB_PASS") !== false ? getenv("DB_PASS") : "";
+        $host = $_ENV["DB_HOST"] ?? "localhost";
+        $db = $_ENV["DB_NAME"] ?? "servicio_medico";
+        $user = $_ENV["DB_USER"] ?? "root";
+        $password = isset($_ENV["DB_PASS"]) ? $_ENV["DB_PASS"] : "";
 
         try {
             $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $password);
@@ -18,7 +18,7 @@ class Config {
         }
 
         catch(PDOException $e) {
-            echo "error";
+            die("Error de conexión a la base de datos: " . $e->getMessage());
         }
 
     }

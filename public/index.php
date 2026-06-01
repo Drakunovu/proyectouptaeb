@@ -4,7 +4,11 @@ use app\controller\Controller;
 use app\controller\PacienteController;
 use app\config\Config;
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+if (file_exists(__DIR__ . '/.env')) {
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+} else {
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+}
 $dotenv->load();
 
 $appEnv = $_ENV['APP_ENV'] ?? 'production';
