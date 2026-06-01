@@ -14,16 +14,23 @@ class Paciente
         $this->db = $conexion;
     }
 
-    public function RegistrarPaciente($cedula, $nombre, $apellido, $contraseña, $tipo, $pnf, $fecha_nacimiento, $tlfprincipal, $tlfemergencia, $sexo)
+    public function registrarPaciente($cedula, $nombre, $apellido, $tipo, $pnf, $fecha_nacimiento, $tlfprincipal, $tlfemergencia, $sexo)
     {
         try {
-            if (empty($contraseña)) {
-                $contraseña_final = "UptaebMedicos001";
-            } else {
-                $contraseña_final = $contraseña;
-            }
 
-            $contraseña_encriptada = password_hash($contraseña_final, PASSWORD_BCRYPT);
+
+        $sqlCheck = "SELECT COUNT(*) FROM usuarios WHERE cedula = :cedula";
+        $stmtCheck = $this->db->prepare($sqlCheck);
+        $stmtCheck->execute(
+            [':cedula' => $cedula]
+        );
+
+        if ($stmtCheck->fetchColumn() > 0){
+           return "La cédula de identidad ya se encuentra registrada en el sistema.";
+        }
+
+         $contraseñaCreada = $cedula . 'uptaeb';
+         $contraseñaEncriptada = password_hash($contraseñaCreada, PASSWORD_BCRYPT);
 
         $sql = "INSERT INTO usuarios (cedula, nombre, apellido, contrasena, tipo, pnf, fecha_nacimiento, tlfprincipal, tlfemergencia, sexo) 
                 VALUES (:cedula, :nombre, :apellido, :contrasena, :tipo, :pnf, :fecha_nacimiento, :tlfprincipal, :tlfemergencia, :sexo)";
@@ -34,7 +41,7 @@ class Paciente
             ':cedula'           => (int)$cedula, 
             ':nombre'           => trim($nombre),
             ':apellido'         => trim($apellido),
-            ':contrasena'       => $contraseña_encriptada,
+            ':contrasena'       => $contraseñaEncriptada,
             ':tipo'             => (int)$tipo,
             ':pnf'              => (int)$pnf,
             ':fecha_nacimiento' => $fecha_nacimiento,
