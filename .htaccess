@@ -1,5 +1,7 @@
 RewriteEngine On
 
+RewriteRule ^$ public/index.php [L,QSA]
+
 RewriteRule ^index\.php$ public/index.php [L,QSA]
 
 RewriteRule ^assets/(.*)$ public/assets/$1 [L]
