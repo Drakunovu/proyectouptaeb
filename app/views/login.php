@@ -8,6 +8,7 @@
                     <p class="action-card__p">Control de Acceso<p/>
                     
                     <form class="action-card__form" action="" method="POST">
+                        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                         <label class="action-card__label"> Cédula de identidad
                             <input class="action-card__input" placeholder="Ej. 1532423" type="text" name="cedula" id="loginCardCedula">
                         </label>
@@ -24,6 +25,7 @@
                 <div class="action-card">
                     <h1 class="action-card__title">Registro!</h1>
                     <form class="action-card__form" action="" method="POST">
+                        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                         <label class="action-card__label"> Cedula
                             <input class="action-card__input" type="text" name="cedula" id="">
                         </label>

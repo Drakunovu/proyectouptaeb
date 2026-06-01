@@ -44,6 +44,7 @@ class Controller {
                 session_regenerate_id(true);
                 $_SESSION["login_notif"] = "Logueado";
                 $_SESSION["cedula"] = $usuarioEncontrado["cedula"];
+                $_SESSION["user_agent"] = $_SERVER['HTTP_USER_AGENT'];
                 header("Location: perfil");
                 exit();
             }

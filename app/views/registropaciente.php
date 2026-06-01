@@ -38,7 +38,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
                         </div>
                     <?php endif; ?>
                     <form action="index.php" method="POST">
-                        
+                        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                         <input type="hidden" name="form" value="registro_paciente">
                         
                         <div class="row">
